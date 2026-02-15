@@ -1,0 +1,33 @@
+#include <stdio.h>
+
+int main() {
+    int nums1[1000], nums2[1000];
+    int size1, size2;
+
+    scanf("%d", &size1);
+    for (int i = 0; i < size1; i++) {
+        scanf("%d", &nums1[i]);
+    }
+
+    scanf("%d", &size2);
+    for (int i = 0; i < size2; i++) {
+        scanf("%d", &nums2[i]);
+    }
+
+    int count[1001] = {0};
+
+   
+    for (int i = 0; i < size1; i++) {
+        count[nums1[i]]++;
+    }
+
+    
+    for (int i = 0; i < size2; i++) {
+        if (count[nums2[i]] > 0) {
+            printf("%d ", nums2[i]);
+            count[nums2[i]]--;
+        }
+    }
+
+    return 0;
+}
