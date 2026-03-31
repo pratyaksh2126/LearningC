@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct TreeNode {
+    int val;
+    struct TreeNode* left;
+    struct TreeNode* right;
+};
+
+struct TreeNode* newNode(int val) {
+    struct TreeNode* node = (struct TreeNode*)malloc(sizeof(struct TreeNode));
+    node->val = val;
+    node->left = node->right = NULL;
+    return node;
+}
+
+struct TreeNode* insert(struct TreeNode* root, int val) {
+    if (!root) return newNode(val);
+    if (val < root->val)
+        root->left = insert(root->left, val);
+    else
+        root->right = insert(root->right, val);
+    return root;
+}
+
+int searchBST(struct TreeNode* root, int val) {
+    if (!root) return 0;
+    if (root->val == val) return 1;
+    if (val < root->val)
+        return searchBST(root->left, val);
+    return searchBST(root->right, val);
+}
+
+int main() {
+    int n, x, val;
+    struct TreeNode* root = NULL;
+
+    scanf("%d", &n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &x);
+        root = insert(root, x);
+    }
+
+    scanf("%d", &val);
+
+    if (searchBST(root, val))
+        printf("Found");
+    else
+        printf("Not Found");
+
+    return 0;
+}
